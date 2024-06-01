@@ -24,7 +24,7 @@ class RconListener(Subject[str], RconClient):
         while True:
             await asyncio.sleep(100)
             try:
-                logger.debug("{self._event} listener: Rewarming...")
+                logger.debug(f"{self._event} listener: Rewarming...")
                 await self.rewarm()
             except Exception as e:
                 logger.error(f"{self._event} listener: FAILED TO REWARM! ERROR: {str(e)}")
