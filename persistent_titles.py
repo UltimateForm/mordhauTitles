@@ -29,9 +29,13 @@ async def ping(ctx: commands.Context):
 
 # TODO: create custom decorator so we dont have to repeat error handling in all the below commands
 
+bot_channel = int(os.environ.get("BOT_CHANNEL", "0"))
+
 
 @bot.command("setTagFormat")
 async def set_tag_format(ctx: commands.Context, arg_format: str):
+    if bot_channel and ctx.channel.id != bot_channel:
+        return
     embed = make_embed(ctx)
     embed.add_field(name="ArgFormat", value=arg_format)
     try:
@@ -51,6 +55,8 @@ async def set_tag_format(ctx: commands.Context, arg_format: str):
 
 @bot.command("setSaluteTimer")
 async def set_salute_timer(ctx: commands.Context, arg_timer: int):
+    if bot_channel and ctx.channel.id != bot_channel:
+        return
     embed = make_embed(ctx)
     embed.add_field(name="ArgFormat", value=f"{arg_timer} seconds")
     try:
@@ -66,6 +72,8 @@ async def set_salute_timer(ctx: commands.Context, arg_timer: int):
 
 @bot.command("addTag")
 async def add_tag(ctx: commands.Context, arg_playfab_id: str, arg_tag: str):
+    if bot_channel and ctx.channel.id != bot_channel:
+        return
     embed = make_embed(ctx)
     embed.add_field(name="PlayfabId", value=arg_playfab_id)
     embed.add_field(name="Tag", value=arg_tag)
@@ -82,6 +90,8 @@ async def add_tag(ctx: commands.Context, arg_playfab_id: str, arg_tag: str):
 
 @bot.command("removeTag")
 async def remove_tag(ctx: commands.Context, arg_playfab_id: str):
+    if bot_channel and ctx.channel.id != bot_channel:
+        return
     embed = make_embed(ctx)
     embed.add_field(name="PlayfabId", value=arg_playfab_id)
     try:
@@ -103,6 +113,8 @@ async def remove_tag(ctx: commands.Context, arg_playfab_id: str):
 
 @bot.command("addSalute")
 async def add_salute(ctx: commands.Context, arg_playfab_id: str, arg_salute: str):
+    if bot_channel and ctx.channel.id != bot_channel:
+        return
     embed = make_embed(ctx)
     embed.add_field(name="PlayfabId", value=arg_playfab_id)
     embed.add_field(name="Salute", value=arg_salute, inline=False)
@@ -119,6 +131,8 @@ async def add_salute(ctx: commands.Context, arg_playfab_id: str, arg_salute: str
 
 @bot.command("removeSalute")
 async def remove_salute(ctx: commands.Context, arg_playfab_id: str):
+    if bot_channel and ctx.channel.id != bot_channel:
+        return
     embed = make_embed(ctx)
     embed.add_field(name="PlayfabId", value=arg_playfab_id)
     try:
@@ -140,6 +154,8 @@ async def remove_salute(ctx: commands.Context, arg_playfab_id: str):
 
 @bot.command("ptConf")
 async def get_config(ctx: commands.Context):
+    if bot_channel and ctx.channel.id != bot_channel:
+        return
     embed = make_embed(ctx)
     try:
         config_json = json.dumps(config.__dict__, indent=2)

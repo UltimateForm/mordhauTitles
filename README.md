@@ -29,6 +29,7 @@ You need at least Docker installed and a terminal that can run .sh files (linux 
     2. RCON_CONNECT_TIMEOUT (optional)
     3. D_TOKEN (discord bot auth token)
     4. TITLE (optional)
+    5. BOT_CHANNEL (optional id of channel if you want to limit bot use to one channel)
 2. run `sh restart.sh` in terminal
     1. if you're familar with docker or python you don't necessarily need to this, you can run this bot anywhere and however you want
 
