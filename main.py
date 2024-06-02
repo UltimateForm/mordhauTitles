@@ -1,8 +1,8 @@
 import asyncio
 import logger
 from dotenv import load_dotenv
-from persistent_titles import start_persistent_titles
-from migrant_titles import start_migrant_titles
+from persistent_titles import PersistentTitles
+from migrant_titles import MigrantTitles, MigrantComputeEvent
 from rcon_listener import RconListener
 
 load_dotenv()
@@ -10,10 +10,22 @@ load_dotenv()
 
 async def main():
     login_listener = RconListener(event="login", listening=False)
+    migrant_titles = MigrantTitles(login_listener)
+    peristent_titles = PersistentTitles(login_listener)
+
+    def handle_tag_for_removed_rex(event: MigrantComputeEvent):
+        logger.debug(f"handle_tag_for_removed_rex {event}")
+        if event.event_type != "removed":
+            return
+        peristent_titles.login_observer.handle_tag(
+            {"playfabId": event.playfab_id, "userName": event.user_name}
+        )
+
+    migrant_titles.rex_compute.subscribe(handle_tag_for_removed_rex)
     await asyncio.gather(
         login_listener.start(),
-        start_migrant_titles(login_listener),
-        start_persistent_titles(login_listener),
+        migrant_titles.start(),
+        peristent_titles.start(),
     )
 
 

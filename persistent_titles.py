@@ -169,14 +169,24 @@ async def get_config(ctx: commands.Context):
     await ctx.message.reply(embed=embed)
 
 
-async def start_persistent_titles(login_observable: Observable[str]):
-    login_observer = LoginObserver(config)
-    login_observable.subscribe(login_observer)
-    await bot.start(token=os.environ.get("D_TOKEN"))
+class PersistentTitles:
+    login_observer: LoginObserver
+    _login_observable: Observable[str]
+
+    def __init__(self, login_observable: Observable[str]):
+        self._login_observable = login_observable
+        self.login_observer = LoginObserver(config)
+        self._login_observable.subscribe(self.login_observer)
+
+    async def start(self):
+        await bot.start(token=os.environ.get("D_TOKEN"))
+
+
+async def main():
+    login_listener = RconListener(event="login", listening=False)
+    persistent_titles = PersistentTitles(login_listener)
+    await asyncio.gather(login_listener.start(), persistent_titles.start())
 
 
 if __name__ == "__main__":
-    login_listener = RconListener(event="login", listening=False)
-    asyncio.run(
-        asyncio.gather(login_listener.start(), start_persistent_titles(login_listener))
-    )
+    asyncio.run(main())
