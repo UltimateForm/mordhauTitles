@@ -1,9 +1,9 @@
-# mordhauBattleEye
+# mordhauTitles
 
 This bot conjoins two bots: [mordhauMigrantTitles](https://github.com/UltimateForm/mordhauMigrantTitles) & [mordhauPersistentTitles](https://github.com/UltimateForm/mordhauPersistentTitles)
 
 
-- [mordhauBattleEye](#mordhaubattleeye)
+- [mordhauTitles](#mordhautitles)
   - [Usage](#usage)
     - [Setup](#setup)
     - [Example .env](#example-env)
