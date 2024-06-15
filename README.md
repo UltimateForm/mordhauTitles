@@ -93,6 +93,7 @@ Commands:
   - example: `.setSaluteTimer 2`
 - .addTag {playfab id} {tag}
   - sets a tag for a playfab id
+  - use `*` in place of playfabid to add title for everyone
   - example: `.addTag D98123JKAS78354 CryBaby`
 - .removeTag {playfab id}
   - removes tag for playfabid
