@@ -34,8 +34,8 @@ COPY ./chat_observer.py .
 
 COPY ./database.py .
 
-COPY ./playtime_client .
+COPY ./playtime_client.py .
 
-COPY ./session_topic .
+COPY ./session_topic.py .
 
 CMD ["pipenv", "run", "python", "main.py"]
