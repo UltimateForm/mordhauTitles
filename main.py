@@ -17,8 +17,10 @@ async def main():
         logger.debug(f"handle_tag_for_removed_rex {event}")
         if event.event_type != "removed":
             return
-        peristent_titles.login_observer.handle_tag(
-            {"playfabId": event.playfab_id, "userName": event.user_name}
+        asyncio.create_task(
+            peristent_titles.login_observer.handle_tag(
+                {"playfabId": event.playfab_id, "userName": event.user_name}
+            )
         )
 
     migrant_titles.rex_compute.subscribe(handle_tag_for_removed_rex)

@@ -30,4 +30,12 @@ COPY ./migrant_titles.py ./
 
 COPY ./persistent_titles.py ./
 
+COPY ./chat_observer.py .
+
+COPY ./database.py .
+
+COPY ./playtime_client .
+
+COPY ./session_topic .
+
 CMD ["pipenv", "run", "python", "main.py"]
