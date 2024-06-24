@@ -41,12 +41,10 @@ class TitleCompute(Subject[MigrantComputeEvent]):
     def _remove_rex(self, playfab_id: str, user_name):
         target_name = self._sanitize_name(playfab_id, user_name)
         task = asyncio.create_task(
-            self._execute_command(
-                f"renameplayer {playfab_id} {target_name}"
-            )
+            self._execute_command(f"renameplayer {playfab_id} {target_name}")
         )
 
-        def callback(_task:asyncio.Task):
+        def callback(_task: asyncio.Task):
             self.on_next(MigrantComputeEvent("removed", playfab_id, target_name))
 
         task.add_done_callback(callback)
@@ -59,7 +57,7 @@ class TitleCompute(Subject[MigrantComputeEvent]):
             ),
         )
 
-        def callback(_task:asyncio.Task):
+        def callback(_task: asyncio.Task):
             self.on_next(MigrantComputeEvent("placed", playfab_id, target_name))
 
         task.add_done_callback(callback)
@@ -110,10 +108,8 @@ class TitleCompute(Subject[MigrantComputeEvent]):
         if not success:
             return
 
-        event_text = event_data.get("eventText", "").lower()
-        if event_text.lower().startswith(
-            "logged out"
-        ):
+        event_order = event_data.get("order", "")
+        if event_order == "out":
             logged_out_playfab_id = event_data.get("playfabId", None)
             if logged_out_playfab_id and logged_out_playfab_id in self.users_map.keys():
                 self.users_map.pop(logged_out_playfab_id)
