@@ -1,9 +1,9 @@
 import asyncio
-import logger
 from dotenv import load_dotenv
-from persistent_titles import PersistentTitles
-from migrant_titles import MigrantTitles, MigrantComputeEvent
-from rcon_listener import RconListener
+from common import logger
+from persistent_titles.main import PersistentTitles
+from migrant_titles.main import MigrantTitles, MigrantComputeEvent
+from rcon.rcon_listener import RconListener
 
 load_dotenv()
 

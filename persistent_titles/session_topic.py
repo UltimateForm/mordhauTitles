@@ -1,14 +1,12 @@
 from os import environ
 from datetime import datetime, timedelta
-from dataclasses import dataclass
 import asyncio
 import dotenv
 from motor.motor_asyncio import AsyncIOMotorCollection, AsyncIOMotorClient
 from reactivex import Subject
 import pymongo
-from data import SessionEvent
-import logger
-import parsers
+from persistent_titles.data import SessionEvent
+from common import logger, parsers
 
 
 class SessionTopic(Subject[SessionEvent]):

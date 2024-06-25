@@ -1,7 +1,7 @@
 import asyncio
 from reactivex import Subject, operators
-from rcon import RconClient
-import logger
+from rcon.rcon import RconClient
+from common import logger
 
 RECONNECT_WAIT_TIME_SECS = 5
 
@@ -46,7 +46,7 @@ class RconListener(Subject[str], RconClient):
             while True:
                 pck = await self.recv_pkt()
                 self.on_next(pck.body)
-        except:
+        except Exception:
             if rewarm_task:
                 rewarm_task.cancel()
             raise

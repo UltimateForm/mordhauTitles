@@ -2,8 +2,8 @@ from os import environ
 import asyncio
 from reactivex import Observer
 from motor.motor_asyncio import AsyncIOMotorCollection, AsyncIOMotorClient
-import logger
-from data import SessionEvent
+from persistent_titles.data import SessionEvent
+from common import logger
 
 
 class PlaytimeClient(Observer[SessionEvent]):

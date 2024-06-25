@@ -3,7 +3,7 @@ from motor.motor_asyncio import (
     AsyncIOMotorClient,
     AsyncIOMotorCollection,
 )
-import logger
+from common import logger
 
 
 def load_db() -> tuple[AsyncIOMotorCollection, AsyncIOMotorCollection] | None:

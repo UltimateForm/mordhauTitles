@@ -1,11 +1,11 @@
 import asyncio
 from reactivex import Observer
 import numpy as np
-from data import Config
-from rcon import RconContext
-from rcon_listener import RconListener
-from parsers import parse_event, GROK_LOGIN_EVENT
-from playtime_client import PlaytimeClient
+from persistent_titles.playtime_client import PlaytimeClient
+from persistent_titles.data import Config
+from rcon.rcon import RconContext
+from rcon.rcon_listener import RconListener
+from common.parsers import parse_event, GROK_LOGIN_EVENT
 
 
 class LoginObserver(Observer[str]):

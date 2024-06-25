@@ -2,8 +2,8 @@ from dataclasses import dataclass, field
 import json
 import os
 from dacite import from_dict
-import logger
-from typing import Optional
+from common import logger
+
 
 @dataclass
 class Config:
@@ -37,6 +37,7 @@ def save_config(config: Config, path: str = "./persist/config.json"):
 
 if __name__ == "__main__":
     import numpy
+    import sys
 
     logger.use_date_time_logger()
     conf = load_config()
@@ -45,11 +46,11 @@ if __name__ == "__main__":
     gates = numpy.fromiter(
         [int(key) for key in playtime_keys if key.isnumeric()], numpy.int64
     )
-    value = 120
-    min_gates = gates[gates <= value]
+    VALUE = 120
+    min_gates = gates[gates <= VALUE]
     if len(min_gates) == 0:
         print("None found")
-        exit()
+        sys.exit()
     highest_gate = min_gates.max()
     target_tag = conf.playtime_tags[str(highest_gate)]
     print(f"Target tag: {target_tag}")

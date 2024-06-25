@@ -3,7 +3,7 @@ import struct
 import os
 from asyncio import StreamReader, StreamWriter
 from contextlib import AbstractAsyncContextManager
-import logger
+from common import logger
 
 # Packet types
 SERVERDATA_AUTH = 3

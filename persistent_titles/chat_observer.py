@@ -1,8 +1,8 @@
 import asyncio
 from reactivex import Observer
-from rcon import RconContext
-from parsers import GROK_CHAT_EVENT, parse_event
-from playtime_client import PlaytimeClient
+from rcon.rcon import RconContext
+from persistent_titles.playtime_client import PlaytimeClient
+from common.parsers import GROK_CHAT_EVENT, parse_event
 
 
 class ChatObserver(Observer[str]):
