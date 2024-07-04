@@ -2,7 +2,7 @@ import asyncio
 from reactivex import Observer
 import numpy as np
 from persistent_titles.playtime_client import PlaytimeClient
-from persistent_titles.data import Config
+from config_client.data import Config
 from rcon.rcon import RconContext
 from rcon.rcon_listener import RconListener
 from common.parsers import parse_event, GROK_LOGIN_EVENT

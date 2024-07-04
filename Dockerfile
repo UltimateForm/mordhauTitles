@@ -5,37 +5,21 @@ WORKDIR /bot
 COPY ./Pipfile .
 
 COPY ./.env .
-
+     
 RUN pip install pipenv
 
 RUN pipenv install
 
+ADD ./common/* ./common
+
+ADD ./config_client/* ./config_client
+
+ADD ./migrant_titles/* ./migrant_titles
+
+ADD ./persistent_titles/* ./persistent_titles
+
+ADD ./rcon/* ./rcon
+
 COPY ./main.py ./
-
-COPY ./parsers.py .
-
-COPY ./rcon_listener.py .
-
-COPY ./rcon.py .
-
-COPY ./login_observer.py .
-
-COPY ./data.py .
-
-COPY ./logger.py ./
-
-COPY ./login_observer.py ./
-
-COPY ./migrant_titles.py ./
-
-COPY ./persistent_titles.py ./
-
-COPY ./chat_observer.py .
-
-COPY ./database.py .
-
-COPY ./playtime_client.py .
-
-COPY ./session_topic.py .
 
 CMD ["pipenv", "run", "python", "main.py"]

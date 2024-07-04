@@ -16,6 +16,7 @@ motor = "*"
 [dev-packages]
 flake8 = "*"
 flake8-async = "*"
+pytest = "*"
 
 [scripts]
 lint = "flake8"
