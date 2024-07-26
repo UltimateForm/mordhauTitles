@@ -31,7 +31,7 @@ class PersistentTitles:
         chat_listener: RconListener,
         live_sessions_collection: AsyncIOMotorCollection,
     ):
-        chat_observer = ChatObserver(playtime_client)
+        chat_observer = ChatObserver(config, playtime_client)
         chat_listener.subscribe(chat_observer)
         session_topic = SessionTopic(live_sessions_collection)
         session_topic.subscribe(playtime_client)
