@@ -129,6 +129,11 @@ def test_compute_time_txt_hours():
     assert txt == "2.1 hours"
 
 
+def test_compute_time_txt_hours_big():
+    txt = compute_time_txt(12000)
+    assert txt == "200 hours"
+
+
 def test_slice_text_array_at_total_length():
     txt = ["hello", "world", "my", "name", "is", "jon", "doe"]
     r = slice_text_array_at_total_length(10, txt)
