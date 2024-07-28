@@ -2,6 +2,7 @@ from os import environ
 import asyncio
 from dataclasses import dataclass
 from reactivex import Observable, Subject
+from config_client.main import config
 from rcon.rcon_listener import RconListener
 from rcon.rcon import RconContext
 from common import parsers, logger
@@ -33,7 +34,8 @@ class TitleCompute(Subject[MigrantComputeEvent]):
 
     def _sanitize_name(self, playfab_id: str, current_name: str):
         login_username = self.users_map.get(playfab_id, None)
-        target_name = login_username or current_name
+        rename = config.rename.get(playfab_id, None)
+        target_name = rename or login_username or current_name
         return target_name.replace(f"[{self.rex_tile}]", "").lstrip()
 
     def _remove_rex(self, playfab_id: str, user_name):
@@ -94,6 +96,11 @@ class TitleCompute(Subject[MigrantComputeEvent]):
             # note: uncomment this for solo debug
             # elif killer_playfab_id == self.current_rex:
             #     self.current_rex = ""
+            #     asyncio.create_task(
+            #         self._execute_command(
+            #             f"say {killer} has defeated {killed} and claimed his {self.rex_tile} title"
+            #         )
+            #     )
             #     self._remove_rex(killer_playfab_id, killer)
         except Exception as e:
             logger.error(f"Failed to process REX tag compute, {str(e)}")
