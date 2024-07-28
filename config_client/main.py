@@ -240,8 +240,11 @@ async def get_config(ctx: commands.Context):
     try:
         config_json = json.dumps(config.__dict__, indent=2)
         json_code = f"```{config_json}```"
-        too_long = len(json_code) >= 1024
-
+        config_len = len(json_code)
+        too_long = config_len >= 1024 and config_len < 2000
+        really_too_long = config_len >= 2000
+        if really_too_long:
+            json_code = "Config is too large (more than 2k characters), please consult file directly at ./persist/config.json"
         embed.add_field(
             name="Config",
             value=json_code if not too_long else "Too long, sent separately",
